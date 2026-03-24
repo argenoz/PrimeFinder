@@ -67,9 +67,48 @@ def P_set_find__(n):
 
 
 
-def get_P(n):
-    return P_set_find__(n)[-1]
+def P_set_find_2(n):
+    
+    if n<1:
+        return []
+    ans = [2,3]
+    ci = []
+    fTrue = True
+    fFalse = not fTrue
+    while True:
+        l = len(ans)
+        if l>=n:
+            if l > n:
+                ans = ans[:n]
+            break
+        bigi = ans[-1]
+        z = [ i-bigi%i    for i in ans[:-1] ]
+        i=1
+        while i < bigi:
+            flg = fFalse
+            l = len(z)
+            for q in range(l):
+            
+                flg = z[q] == i%ans[q]
+                if flg:
+                    break
+            if not flg:
+                ci.append(i+bigi)
+            i = i+1
+        
+        
+        ans = ans+ci
+        ci = []
+        ci = []
+    return ans
 
-print(get_P(1000000))
+    
+
+
+
+def get_P(n):
+    return P_set_find_2(n)[-1]
+
+print(get_P(1000001-2))
 
 
